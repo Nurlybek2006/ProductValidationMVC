@@ -19,8 +19,8 @@ public sealed class ProductsController(ApplicationDbContext db) : Controller
         if (!string.IsNullOrWhiteSpace(category)) query = query.Where(p => p.Category == category);
         query = sort switch
         {
-            "price-asc" => query.OrderBy(p => p.Price),
-            "price-desc" => query.OrderByDescending(p => p.Price),
+            "price-asc" => query.OrderBy(p => (double)p.Price),
+            "price-desc" => query.OrderByDescending(p => (double)p.Price),
             "name" => query.OrderBy(p => p.Name),
             _ => query.OrderByDescending(p => p.CreatedDate)
         };
@@ -66,12 +66,14 @@ public sealed class ProductsController(ApplicationDbContext db) : Controller
         return RedirectToAction(nameof(Success), new { id = product.Id });
     }
 
+    [HttpGet]
     public async Task<IActionResult> Details(int id)
     {
         var product = await db.Products.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
         return product is null ? NotFound() : View(product);
     }
 
+    [HttpGet]
     public async Task<IActionResult> Success(int id)
     {
         var product = await db.Products.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
