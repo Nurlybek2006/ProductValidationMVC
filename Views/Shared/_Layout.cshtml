@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="kk" data-theme="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] · NURLYBEK PRODUCT LAB</title>
+    <script>try{document.documentElement.dataset.theme=localStorage.getItem('npl-theme')||'dark'}catch{}</script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <a class="brand" asp-controller="Home" asp-action="Index"><span class="brand-mark">N</span><span><strong>NURLYBEK</strong><small>PRODUCT LAB</small></span></a>
+        <div class="nav-caption">WORKSPACE</div>
+        <nav class="side-nav" aria-label="Негізгі навигация">
+          <a class="side-link @(ViewContext.RouteData.Values["controller"]?.ToString()=="Home" ? "active" : "")" asp-controller="Home" asp-action="Index"><span>⌂</span>Dashboard</a>
+          <a class="side-link @(ViewContext.RouteData.Values["controller"]?.ToString()=="Products" && ViewContext.RouteData.Values["action"]?.ToString()=="Index" ? "active" : "")" asp-controller="Products" asp-action="Index"><span>▦</span>Тауарлар</a>
+          <a class="side-link @(ViewContext.RouteData.Values["action"]?.ToString()=="Create" ? "active" : "")" asp-controller="Products" asp-action="Create"><span>＋</span>Жаңа тауар</a>
+          <a class="side-link @(ViewContext.RouteData.Values["controller"]?.ToString()=="Validation" ? "active" : "")" asp-controller="Validation" asp-action="Index"><span>✓</span>Validation зертханасы</a>
+        </nav>
+        <div class="sidebar-bottom"><div class="nav-caption">PROJECT</div><a class="side-link" href="https://learn.microsoft.com/aspnet/core/mvc/" target="_blank" rel="noreferrer"><span>↗</span>MVC туралы</a><div class="sidebar-status"><i></i><span><b>System operational</b><small>SQLite · Local database</small></span></div></div>
+      </aside>
+      <div class="main-column">
+        <header class="topbar">
+          <button class="icon-button mobile-menu" id="menuToggle" type="button" aria-label="Навигацияны ашу">☰</button>
+          <div class="breadcrumbs"><a asp-controller="Home" asp-action="Index">Workspace</a><span>/</span><strong>@ViewData["Title"]</strong></div>
+          <div class="topbar-actions"><span class="topbar-clock">PRODUCT OPERATIONS</span><button id="themeToggle" class="icon-button" type="button" aria-label="Тақырыпты ауыстыру" title="Light / dark mode">◐</button><span class="avatar">N</span><span class="user-name">Nurlibek</span></div>
+        </header>
+        <main role="main" class="page-content">
+            @RenderBody()
+        </main>
+        <footer class="page-footer"><span>© 2026 NURLYBEK PRODUCT LAB</span><span>Built for product quality <b>·</b> ASP.NET Core MVC</span></footer>
+      </div>
+    </div>
+    <div class="sidebar-scrim" id="sidebarScrim"></div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

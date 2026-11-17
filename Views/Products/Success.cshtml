@@ -1,0 +1,3 @@
+@model ProductValidationMVC.Models.Product
+@{ ViewData["Title"] = "Сәтті сақталды"; }
+<section class="success-wrap"><div class="success-check">✓</div><div class="eyebrow">DATABASE WRITE COMPLETE</div><h1>Тауар сәтті сақталды<span class="heading-dot">.</span></h1><p><b>@Model.Name</b> өнімі SQLite дерекқорына қосылды.</p><div class="success-meta"><span>SKU-@Model.Id.ToString("D4")</span><span>@Model.Price.ToString("N2") ₸</span><span>@Model.Quantity дана</span></div><div class="success-actions"><a class="btn btn-primary app-button" asp-action="Details" asp-route-id="@Model.Id">Тауарды көру <span>→</span></a><a class="btn btn-quiet app-button" asp-action="Create">Тағы бір тауар қосу</a></div></section>
